@@ -21,7 +21,8 @@ Team.init({
 }, {  
   underscored: true,
   sequelize: db,
-  modelName: 'Teams',
+  modelName: 'teams',
+  freezeTableName: true,
   timestamps: false,
 });
 

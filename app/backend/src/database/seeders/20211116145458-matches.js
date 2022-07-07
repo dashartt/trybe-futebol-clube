@@ -1,7 +1,7 @@
 module.exports = {
   up: async (queryInterface) => {
     await queryInterface.bulkInsert(
-      'Matches',
+      'matches',
       [
         {
           home_team: 16,
@@ -345,6 +345,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.bulkDelete('Matches', null, {});
+    await queryInterface.bulkDelete('matches', null, {});
   },
 };
