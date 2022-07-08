@@ -1,6 +1,7 @@
 import * as express from 'express';
 import handleError from './middlewares/handleError';
 import loginRoutes from './routes/user.routes';
+import teamRoutes from './routes/team.routes'
 
 class App {
   public app: express.Express;
@@ -12,6 +13,9 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.use('/login', loginRoutes);
+    this.app.use('/teams', teamRoutes)
+    this.app.use(handleError);
   }
 
   private config():void {
@@ -23,9 +27,7 @@ class App {
     };
 
     this.app.use(express.json());
-    this.app.use(accessControl);
-    this.app.use('/login', loginRoutes);
-    this.app.use(handleError);
+    this.app.use(accessControl);   
   }
 
   public start(PORT: string | number):void {
