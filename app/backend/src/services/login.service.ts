@@ -1,20 +1,12 @@
-import UserModel from "../database/models/User";
-import { ErrorPayload, User, UserLogin, VerifyService} from "../protocols";
+import { ErrorPayload, UserLogin } from '../protocols';
+import errors from './errors';
 
+const { userInvalidFields } = errors;
 
-export default class LoginService implements VerifyService<User> {    
-
-    verifyFields({ email, password }: UserLogin): void | never {
-        if (!email || !password ||password?.length < 6) {
-            throw { status: 400, message: 'All fields must be filled'} as ErrorPayload;
-        }  
+export default class LoginService {
+  static checkFields({ email, password }: UserLogin): void | ErrorPayload {
+    if (!email || !password || password?.length < 6) {
+      return userInvalidFields;
     }
-
-    // async verifyLogin({ email, password }: UserLogin): Promise<void> | never {
-    //     const user = await UserModel.findOne({ where: { email, password} });
-
-    //     if (!user) {
-    //         throw { status: 400, message: 'not found'  } as ErrorPayload;
-    //     }
-    // }
+  }
 }
