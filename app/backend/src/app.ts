@@ -24,8 +24,8 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    this.app.use('/login', loginRoutes)    
-    this.app.use(handleMiddleErrorsMiddleware)
+    this.app.use('/login', loginRoutes);
+    this.app.use(handleMiddleErrorsMiddleware);
   }
 
   public start(PORT: string | number):void {

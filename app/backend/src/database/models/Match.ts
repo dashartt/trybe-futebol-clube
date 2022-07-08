@@ -13,7 +13,7 @@ class Match extends Model {
 
 Match.init({
   id: {
-    type: DataTypes.INTEGER,    
+    type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
@@ -37,7 +37,7 @@ Match.init({
   inProgress: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-  }
+  },
 }, {
   underscored: true,
   sequelize: db,
@@ -46,8 +46,7 @@ Match.init({
   timestamps: false,
 });
 
-Match.hasOne(Team, { foreignKey: 'homeTeam', as: 'teams_home'})
-Match.hasOne(Team, { foreignKey: 'awayTeam', as: 'teams_away'})
-
+Match.hasOne(Team, { foreignKey: 'homeTeam', as: 'teams_home' });
+Match.hasOne(Team, { foreignKey: 'awayTeam', as: 'teams_away' });
 
 export default Match;

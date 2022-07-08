@@ -6,12 +6,12 @@ class User extends Model {
   username!: string;
   role!: string;
   email!: string;
-  password!: string; 
+  password!: string;
 }
 
 User.init({
   id: {
-    type: DataTypes.NUMBER,    
+    type: DataTypes.NUMBER,
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
@@ -31,8 +31,8 @@ User.init({
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
-}, {  
+  },
+}, {
   underscored: true,
   sequelize: db,
   modelName: 'users',
