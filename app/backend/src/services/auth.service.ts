@@ -7,7 +7,9 @@ export default class AuthService {
     return sign(data, secret, config);
   }
 
-  static getDataToken(token: string) {
+  static getDataToken(token: string | undefined) {
+    if (!token) return;
+
     return verify(token, secret);
   }
 }
