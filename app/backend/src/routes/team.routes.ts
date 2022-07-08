@@ -4,13 +4,13 @@ import TeamController from '../controllers/team.controller';
 const matchRoutes = Router();
 
 matchRoutes.get(
-    '/',
-    TeamController.getAll,
+  '/',
+  TeamController.getAll,
 );
 
 matchRoutes.get(
-    '/:id',
-    TeamController.getOne,
+  '/:id',
+  TeamController.getOne,
 );
 
 export default matchRoutes;
