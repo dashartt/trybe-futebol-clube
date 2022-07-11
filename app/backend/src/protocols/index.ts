@@ -11,7 +11,7 @@ export interface IUser extends IUserLogin{
 }
 
 export interface ITeam {
-  id?: number, 
+  id?: number,
   teamName: string
 }
 
