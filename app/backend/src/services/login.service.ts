@@ -1,17 +1,17 @@
 import User from '../database/models/User';
-import { ErrorPayload, UserLogin } from '../protocols';
+import { IErrorPayload, IUserLogin } from '../protocols';
 import errors from './errors';
 
 const { invalidLoginData, userNotFound } = errors;
 
 export default class LoginService {
-  static checkEmailPassword({ email, password }: UserLogin): void | ErrorPayload {
+  static checkEmailPassword({ email, password }: IUserLogin): void | IErrorPayload {
     if (!email || !password || password?.length < 6) {
       return invalidLoginData;
     }
   }
 
-  static async isValidData({ email, password }: UserLogin): Promise<void | ErrorPayload> {
+  static async isValidData({ email, password }: IUserLogin): Promise<void | IErrorPayload> {
     const user = await User.findOne({ where: { email, password } });
 
     if (!user) return userNotFound;

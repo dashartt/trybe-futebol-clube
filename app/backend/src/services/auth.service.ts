@@ -1,9 +1,9 @@
 import { sign, verify } from 'jsonwebtoken';
-import { UserLogin } from '../protocols';
+import { IUserLogin } from '../protocols';
 import { config, secret } from '../configs/auth';
 
 export default class AuthService {
-  static generateToken(data: Omit<UserLogin, 'password'>) {
+  static generateToken(data: Omit<IUserLogin, 'password'>) {
     return sign(data, secret, config);
   }
 

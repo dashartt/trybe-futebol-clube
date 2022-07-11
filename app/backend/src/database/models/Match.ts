@@ -1,8 +1,9 @@
 import { DataTypes, Model } from 'sequelize';
+import { IMatch } from '../../protocols';
 import db from '.';
 import Team from './Team';
 
-class Match extends Model {
+class Match extends Model<IMatch> {
   id!: number;
   homeTeam!: number;
   homeTeamGoals!: number;
@@ -42,11 +43,10 @@ Match.init({
   underscored: true,
   sequelize: db,
   modelName: 'matches',
-  freezeTableName: true,
   timestamps: false,
 });
 
-Match.hasOne(Team, { foreignKey: 'homeTeam', as: 'teams_home' });
-Match.hasOne(Team, { foreignKey: 'awayTeam', as: 'teams_away' });
+Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
+Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default Match;

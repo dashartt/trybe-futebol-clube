@@ -1,8 +1,8 @@
 import { NextFunction, Response, Request } from 'express';
-import { ErrorPayload } from '../protocols';
+import { IErrorPayload } from '../protocols';
 
 export default function handleError(
-  err: ErrorPayload,
+  err: IErrorPayload,
   _req: Request,
   res: Response,
   _next: NextFunction,
