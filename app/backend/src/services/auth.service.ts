@@ -1,12 +1,11 @@
 import { sign, verify } from 'jsonwebtoken';
 import { IErrorPayload, IToken, IUserLogin } from '../protocols';
 import { config, secret } from '../configs/auth';
-import errors from '../services/errors';
+import errors from './errors';
 
 const { invalidToken } = errors;
 
 export default class AuthService {
-  
   static generateToken(data: Omit<IUserLogin, 'password'>) {
     return sign(data, secret, config);
   }
@@ -16,20 +15,20 @@ export default class AuthService {
       return {
         payload: null,
         error: invalidToken as IErrorPayload,
-      }
+      };
     }
 
-    try {      
+    try {
       const responseToken = verify(token, secret) as IToken;
       return {
         payload: responseToken,
-        error: null
-      }
-    } catch(error) {      
+        error: null,
+      };
+    } catch (error) {
       return {
         payload: null,
         error: invalidToken as IErrorPayload,
-      }
+      };
     }
   }
 }

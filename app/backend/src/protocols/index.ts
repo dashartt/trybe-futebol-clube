@@ -1,4 +1,4 @@
-import { Request } from "express";
+import { Request } from 'express';
 
 // TOKEN
 export interface IToken {
@@ -53,13 +53,11 @@ export interface IServicePayload<T> {
   payload: T,
 }
 
-
 export interface IVerifyService<T> {
   verifyFields(data: T, error: IErrorPayload): void | Error;
 }
 
-// EXPRESS 
-
+// EXPRESS
 export interface ICustomRequest extends Request {
   email: string;
 }

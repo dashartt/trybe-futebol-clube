@@ -16,4 +16,9 @@ export default class MatchController {
 
     return res.status(200).json(matches);
   }
+
+  static async create(req: Request, res: Response, _next: NextFunction) {
+    console.log('chegou em create');
+    res.end();
+  }
 }

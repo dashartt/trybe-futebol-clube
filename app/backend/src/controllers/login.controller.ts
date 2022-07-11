@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from 'express';
-import { IServicePayload, IToken, IUser, IUserLogin } from '../protocols';
+import { IUser, IUserLogin } from '../protocols';
 
 import AuthService from '../services/auth.service';
 import LoginService from '../services/login.service';
@@ -36,7 +36,7 @@ export default class LoginController {
     if (data.payload?.email) {
       const role = await LoginService.getRole(data.payload.email as string);
       return res.status(200).json(role);
-    } 
+    }
     return res.end();
   }
 }
