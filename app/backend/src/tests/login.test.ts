@@ -17,7 +17,7 @@ describe('/login', () => {
   let response: Response;
 
   describe('when login is successful', () => {
-    it('return token', async () => {
+    it('/ - return token', async () => {
       response = await chai.request(app)
         .post('/login')
         .send({
@@ -29,7 +29,7 @@ describe('/login', () => {
       expect(response.body).have.property('token');
     });
 
-    it('returns the user role', async () => {
+    it('/validate - returns the user role', async () => {
       const stubDecoded = sinon.stub(AuthService, 'getDataToken').returns('joqlima@gmail.com');
       const stubRole = sinon.stub(LoginService, 'getRole').resolves({ role: 'admin'} as User);
 
@@ -47,7 +47,7 @@ describe('/login', () => {
   })
 
   describe('when login is incorrect', () => {
-    it('without informed email', async () => {
+    it('/ - without informed email', async () => {
       response = await chai.request(app)
         .post('/login')
         .send({
@@ -58,7 +58,7 @@ describe('/login', () => {
       expect(response.body).have.property('message').equal("All fields must be filled");
     })
 
-    it('without informed password', async () => {
+    it('/ - without informed password', async () => {
       response = await chai.request(app)
         .post('/login')
         .send({
@@ -69,7 +69,7 @@ describe('/login', () => {
       expect(response.body).have.property('message').equal("All fields must be filled");
     })
 
-    it('incorrect password', async () => {
+    it('/ - incorrect password', async () => {
       response = await chai.request(app)
         .post('/login')
         .send({
@@ -81,7 +81,7 @@ describe('/login', () => {
       expect(response.body).have.property('message').equal("Incorrect email or password");
     })
 
-    it('incorrect email', async () => {
+    it('/ - incorrect email', async () => {
       response = await chai.request(app)
         .post('/login')
         .send({
