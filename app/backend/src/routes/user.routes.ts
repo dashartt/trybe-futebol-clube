@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import jwtVerifier from '../middlewares/jwtVerifier';
 import LoginController from '../controllers/login.controller';
 
 const loginRoutes = Router();
@@ -12,6 +13,7 @@ loginRoutes.post(
 
 loginRoutes.get(
   '/validate',
+  jwtVerifier,
   LoginController.checkRole,
 );
 
