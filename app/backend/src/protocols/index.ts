@@ -1,46 +1,46 @@
 // ENTITIES
-export interface UserLogin {
+export interface IUserLogin {
   email: string;
   password: string;
 }
 
-export interface User extends UserLogin{
+export interface IUser extends IUserLogin{
   id?: number;
   username: string;
   role: string;
 }
 
-export interface Team {
+export interface ITeam {
   id?: number, 
   teamName: string
 }
 
-export interface TeamNames {
+export interface ITeamNames {
   teamHome: {
-    teamName: Pick<Team, 'teamName'>,
+    teamName: Pick<ITeam, 'teamName'>,
   },
   teamAway: {
-    teamName: Pick<Team, 'teamName'>,
+    teamName: Pick<ITeam, 'teamName'>,
   }
 }
 
-export interface Match {
+export interface IMatch {
   id?: number,
   homeTeam: number;
   homeTeamGoals: number;
   awayTeam: number;
   awayTeamGoals: number;
   inProgress: boolean;
-  teamHome?: Pick<TeamNames, 'teamHome'>,
-  teamAway?: Pick<TeamNames, 'teamAway'>,
+  teamHome?: Pick<ITeamNames, 'teamHome'>,
+  teamAway?: Pick<ITeamNames, 'teamAway'>,
 }
 
 // SERVICES
-export interface ErrorPayload {
+export interface IErrorPayload {
   status: number,
   message: string,
 }
 
-export interface VerifyService<T> {
-  verifyFields(data: T, error: ErrorPayload): void | Error;
+export interface IVerifyService<T> {
+  verifyFields(data: T, error: IErrorPayload): void | Error;
 }
