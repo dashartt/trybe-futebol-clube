@@ -1,5 +1,5 @@
 import { NextFunction, Response, Request } from 'express';
-import { IUser, IUserLogin } from '../protocols';
+import { IServicePayload, IToken, IUser, IUserLogin } from '../protocols';
 
 import AuthService from '../services/auth.service';
 import LoginService from '../services/login.service';
@@ -31,10 +31,12 @@ export default class LoginController {
 
   static async checkRole(req: Request, res: Response, _next: NextFunction) {
     const token = req.headers.authorization;
+    const data = AuthService.getDataToken(token); // refactor
 
-    const { email } = AuthService.getDataToken(token) as Omit<IUserLogin, 'password'>;
-    const role = await LoginService.getRole(email);
-
-    return res.status(200).json(role);
+    if (data.payload?.email) {
+      const role = await LoginService.getRole(data.payload.email as string);
+      return res.status(200).json(role);
+    } 
+    return res.end();
   }
 }
