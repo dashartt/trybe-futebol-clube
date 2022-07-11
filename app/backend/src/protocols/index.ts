@@ -1,3 +1,10 @@
+import { Request } from "express";
+
+// TOKEN
+export interface IToken {
+  email: string;
+}
+
 // ENTITIES
 export interface IUserLogin {
   email: string;
@@ -41,6 +48,18 @@ export interface IErrorPayload {
   message: string,
 }
 
+export interface IServicePayload<T> {
+  error: IErrorPayload,
+  payload: T,
+}
+
+
 export interface IVerifyService<T> {
   verifyFields(data: T, error: IErrorPayload): void | Error;
+}
+
+// EXPRESS 
+
+export interface ICustomRequest extends Request {
+  email: string;
 }
