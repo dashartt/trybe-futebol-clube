@@ -8,6 +8,9 @@ import * as jwt from 'jsonwebtoken';
 import User from '../database/models/User';
 import AuthService from '../services/auth.service';
 import LoginService from '../services/login.service';
+import errors from '../services/errors';
+
+const { invalidToken } = errors;
 
 chai.use(chaiHttp);
 
@@ -29,8 +32,15 @@ describe('/login', () => {
       expect(response.body).have.property('token');
     });
 
-    it('/validate - returns the user role', async () => {
-      const stubDecoded = sinon.stub(AuthService, 'getDataToken').returns('joqlima@gmail.com');
+    it('/validate - returns the user role with valid token', async () => {
+      const stubDecoded = sinon.stub(AuthService, 'getDataToken')
+        .returns({ 
+          error: null,
+          payload: { 
+            email: 'joqlima5@gmail.com '
+          }
+        });
+
       const stubRole = sinon.stub(LoginService, 'getRole').resolves({ role: 'admin'} as User);
 
       response = await chai.request(app)
@@ -43,6 +53,22 @@ describe('/login', () => {
 
       stubDecoded.restore();
       stubRole.restore();
+    });
+
+    it('/validate - with invalid token, return error', async () => {
+      const stubDecoded = sinon.stub(AuthService, 'getDataToken')
+        .returns({ 
+          error: invalidToken,
+          payload: null,
+        });      
+
+      response = await chai.request(app)
+        .get('/login/validate')
+        .auth('token', { type: 'bearer' })
+
+      expect(response).to.have.status(401);
+      expect(response.body).to.have.property('message')      
+      stubDecoded.restore();      
     });
   })
 
