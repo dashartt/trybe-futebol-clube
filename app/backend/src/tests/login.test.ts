@@ -4,10 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 import { app } from '../app';
 import { Response } from 'superagent';
-import * as jwt from 'jsonwebtoken';
-import User from '../database/models/User';
 import AuthService from '../services/auth.service';
-import LoginService from '../services/login.service';
 import errors from '../services/errors';
 
 const { invalidToken } = errors;
@@ -21,54 +18,37 @@ describe('/login', () => {
 
   describe('when login is successful', () => {
     it('/ - return token', async () => {
+      const stubToken = sinon.stub(AuthService, 'generateToken').returns('fake_token');
+
       response = await chai.request(app)
         .post('/login')
         .send({
           email: 'user@user.com',
-          password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO',
+          password: 'secret_user',
         })
 
       expect(response).to.have.status(200);
       expect(response.body).have.property('token');
+
+      stubToken.restore();
     });
 
-    it('/validate - returns the user role with valid token', async () => {
-      const stubDecoded = sinon.stub(AuthService, 'getDataToken')
-        .returns({ 
-          error: null,
-          payload: { 
-            email: 'joqlima5@gmail.com '
-          }
-        });
-
-      const stubRole = sinon.stub(LoginService, 'getRole').resolves({ role: 'admin'} as User);
-
-      response = await chai.request(app)
-        .get('/login/validate')
-        .auth('token', { type: 'bearer' })
-
-      expect(response).to.have.status(200);
-      expect(response.body).have.property('role').equal('admin')                  
-
-
-      stubDecoded.restore();
-      stubRole.restore();
-    });
 
     it('/validate - with invalid token, return error', async () => {
       const stubDecoded = sinon.stub(AuthService, 'getDataToken')
         .returns({ 
           error: invalidToken,
           payload: null,
-        });      
-
+        });              
+        
       response = await chai.request(app)
         .get('/login/validate')
         .auth('token', { type: 'bearer' })
 
       expect(response).to.have.status(401);
       expect(response.body).to.have.property('message')      
-      stubDecoded.restore();      
+
+      stubDecoded.restore();            
     });
   })
 
@@ -77,7 +57,7 @@ describe('/login', () => {
       response = await chai.request(app)
         .post('/login')
         .send({
-          password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO',
+          password: 'secret_user',
         })
 
       expect(response).to.have.status(400);
@@ -100,7 +80,7 @@ describe('/login', () => {
         .post('/login')
         .send({
           email: 'user@user.com',
-          password: '$2a$08$Y8Abi8jXvsXyqm.rmp',
+          password: 'secret_useraaaaaaaaaa',
         })
 
       expect(response).to.have.status(401);
@@ -111,8 +91,8 @@ describe('/login', () => {
       response = await chai.request(app)
         .post('/login')
         .send({
-          email: 'user@user',
-          password: '$2a$08$Y8Abi8jXvsXyqm.rmp0B.uQBA5qUz7T6Ghlg/CvVr/gLxYj5UAZVO',
+          email: 'user@useraaaaaaaa',
+          password: 'secret_user',
         })
 
       expect(response).to.have.status(401);
