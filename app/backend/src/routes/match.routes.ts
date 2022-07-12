@@ -4,6 +4,12 @@ import jwtVerifier from '../middlewares/jwtVerifier';
 
 const matchRoutes = Router();
 
+matchRoutes.patch(
+  '/:id',
+  jwtVerifier,
+  MatchController.update,
+);
+
 matchRoutes.post(
   '/',
   jwtVerifier,
