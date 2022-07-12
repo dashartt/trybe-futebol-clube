@@ -1,3 +1,4 @@
+import { compareSync } from 'bcryptjs';
 import User from '../database/models/User';
 import { IErrorPayload, IUserLogin } from '../protocols';
 import errors from './errors';
@@ -12,9 +13,11 @@ export default class LoginService {
   }
 
   static async isValidData({ email, password }: IUserLogin): Promise<void | IErrorPayload> {
-    const user = await User.findOne({ where: { email, password } });
+    const user = await User.findOne({ where: { email } });
 
-    if (!user) return userNotFound;
+    if (!user || !compareSync(password, user?.password)) {
+      return userNotFound;
+    }
   }
 
   static async getRole(email: string) {
