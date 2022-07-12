@@ -23,9 +23,9 @@ export default class MatchController {
     const { id } = req.params;
     const { homeTeamGoals, awayTeamGoals } = req.body;
 
-    await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id }})
-    
-    return res.status(200).json({ homeTeamGoals, awayTeamGoals } );
+    await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+
+    return res.status(200).json({ homeTeamGoals, awayTeamGoals });
   }
 
   static async create(req: Request, res: Response, _next: NextFunction) {
