@@ -7,12 +7,19 @@ const matchRoutes = Router();
 matchRoutes.post(
   '/',
   jwtVerifier,
+  MatchController.searchNonExistentTeam,
+  MatchController.searchDuplicateTeam,
   MatchController.create,
 );
 
 matchRoutes.get(
   '/',
   MatchController.getAll,
+);
+
+matchRoutes.patch(
+  '/:id/finish',
+  MatchController.changeProgress,
 );
 
 export default matchRoutes;

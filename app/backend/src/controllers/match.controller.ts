@@ -1,6 +1,8 @@
 import { NextFunction, Response, Request } from 'express';
 import TeamModel from '../database/models/Team';
 import Match from '../database/models/Match';
+import { IMatch } from '../protocols';
+import MatchService from '../services/match.service';
 
 export default class MatchController {
   static async getAll(req: Request, res: Response, _next: NextFunction) {
@@ -18,7 +20,44 @@ export default class MatchController {
   }
 
   static async create(req: Request, res: Response, _next: NextFunction) {
-    console.log('chegou em create');
-    res.end();
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+
+    const match = await Match
+      .create({ homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress: true } as IMatch);
+
+    return res.status(201).json(match);
+  }
+
+  static async changeProgress(req: Request, res: Response, _next: NextFunction) {
+    const { id } = req.params;
+
+    await Match.update({ inProgress: false }, { where: { id } });
+
+    return res.status(200).json({ message: 'Finished' });
+  }
+
+  static async searchDuplicateTeam(req: Request, res: Response, next: NextFunction) {
+    const match = req.body as IMatch;
+
+    const payload = await MatchService.verifyDuplicateTeam(match);
+
+    if (payload?.error) {
+      return res.status(payload?.error.status).json({ message: payload?.error.message });
+    }
+
+    next();
+  }
+
+  static async searchNonExistentTeam(req: Request, res: Response, next: NextFunction) {
+    const { homeTeam, awayTeam } = req.body;
+
+    const payload = await MatchService
+      .verifyNonExistentTeam(homeTeam as number, awayTeam as number);
+
+    if (payload?.error) {
+      return res.status(payload?.error.status).json({ message: payload?.error.message });
+    }
+
+    next();
   }
 }
