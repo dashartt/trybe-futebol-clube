@@ -1,7 +1,6 @@
 import { NextFunction, Response, Request } from 'express';
 import Team from '../database/models/Team';
 import Match from '../database/models/Match';
-import Score from '../models/entities/score.entity';
 import LeaderBoard from '../models/entities/leaderborad.entity';
 
 export default class LeaderboardController {

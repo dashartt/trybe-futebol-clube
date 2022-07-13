@@ -3,21 +3,21 @@ import IScore from '../../protocols/score';
 
 export default class Score {
   private name = '';
-  private totalPoints = 0; // P
-  private totalGames = 0; // J
-  private totalVictories = 0; // V
-  private totalDraws = 0; // E
-  private totalLosses = 0; // D
-  private goalsFavor = 0; // GP
-  private goalsOwn = 0; // GC
-  private goalsBalance = 0; // SG
-  private efficiency = 0; // percent
+  private totalPoints = 0;
+  private totalGames = 0;
+  private totalVictories = 0;
+  private totalDraws = 0;
+  private totalLosses = 0;
+  private goalsFavor = 0;
+  private goalsOwn = 0;
+  private goalsBalance = 0;
+  private efficiency = 0;
 
   private currentTeamId: number;
   private matches: IMatch[];
   private score: IScore;
 
-  constructor(currentTeamName: string, currentTeamId: number = 0, matches: IMatch[]) {
+  constructor(currentTeamName: string, matches: IMatch[], currentTeamId = 0) {
     this.name = currentTeamName;
     this.currentTeamId = currentTeamId;
     this.matches = matches;
