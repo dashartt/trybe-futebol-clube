@@ -103,23 +103,19 @@ export default class Score {
 
     this.score = {
       name: this.name,
-      totalPoints: this.totalPoints, // P
-      totalGames: this.totalGames, // J
-      totalVictories: this.totalVictories, // V
-      totalDraws: this.totalDraws, // E
-      totalLosses: this.totalLosses, // D
-      goalsFavor: this.goalsFavor, // GP
-      goalsOwn: this.goalsOwn, // GC
-      goalsBalance: this.goalsBalance, // SG
-      efficiency: this.efficiency, // percent
+      totalPoints: this.totalPoints,
+      totalGames: this.totalGames,
+      totalVictories: this.totalVictories,
+      totalDraws: this.totalDraws,
+      totalLosses: this.totalLosses,
+      goalsFavor: this.goalsFavor,
+      goalsOwn: this.goalsOwn,
+      goalsBalance: this.goalsBalance,
+      efficiency: this.efficiency,
     };
 
     return this;
   }
 
   public getScore() { return this.score; }
-
-  // public filterScore(filterBy: string) {
-  //   this.score = this.ma
-  // }
 }
