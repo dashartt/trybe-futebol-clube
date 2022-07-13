@@ -64,4 +64,4 @@ export interface ICustomRequest extends Request {
 
 export type TGoals = {
   goals: number,
-}
+};
