@@ -61,3 +61,7 @@ export interface IVerifyService<T> {
 export interface ICustomRequest extends Request {
   email: string;
 }
+
+export type TGoals = {
+  goals: number,
+}
