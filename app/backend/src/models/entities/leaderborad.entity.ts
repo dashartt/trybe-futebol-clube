@@ -1,10 +1,22 @@
+import { IMatch, ITeam } from '../../protocols';
 import IScore from '../../protocols/score';
+import Score from './score.entity';
 
 export default class LeaderBoard {
   private scores: IScore[];
+  private teams: ITeam[];
+  private matches: IMatch[];
 
-  constructor(scores: IScore[]) {
-    this.scores = scores;
+  constructor(teams: ITeam[], matches: IMatch[]) {
+    this.teams = teams;
+    this.matches = matches;
+  }
+
+  build() {
+    this.scores = this.teams.map(({ teamName, id }) => (
+      new Score(teamName, id, this.matches).buildScore().getScore()));
+
+    return this;
   }
 
   sort() {
@@ -28,5 +40,9 @@ export default class LeaderBoard {
       const byGoalsOwn = next.goalsOwn - prev.goalsOwn;
       return byGoalsOwn;
     });
+  }
+
+  get() {
+    return this.build().sort();
   }
 }

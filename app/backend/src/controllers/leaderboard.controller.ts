@@ -7,19 +7,9 @@ import LeaderBoard from '../models/entities/leaderborad.entity';
 export default class LeaderboardController {
   static async getScores(_req: Request, res: Response, _next: NextFunction) {
     const matches = await Match.findAll({ where: { inProgress: false } });
-
     const teams = await Team.findAll();
-    const scores = teams
-      .map(({ teamName, id }) => (
-        new Score(
-          teamName,
-          id,
-          matches,
-        )
-          .buildScore().getScore()));
+    const leaderboard = new LeaderBoard(teams, matches).get();
 
-    const leaderboard = new LeaderBoard(scores).sort();
-
-    res.status(200).json(leaderboard);
+    return res.status(200).json(leaderboard);
   }
 }
