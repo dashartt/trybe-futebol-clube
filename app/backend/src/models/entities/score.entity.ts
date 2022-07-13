@@ -17,7 +17,7 @@ export default class Score {
   private matches: IMatch[];
   private score: IScore;
 
-  constructor(currentTeamName: string, currentTeamId: number, matches: IMatch[]) {
+  constructor(currentTeamName: string, currentTeamId: number = 0, matches: IMatch[]) {
     this.name = currentTeamName;
     this.currentTeamId = currentTeamId;
     this.matches = matches;
