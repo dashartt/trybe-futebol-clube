@@ -14,7 +14,7 @@ export default class LeaderBoard {
 
   build() {
     this.scores = this.teams.map(({ teamName, id }) => (
-      new Score(teamName, id, this.matches).buildScore().getScore()));
+      new Score(teamName, this.matches, id).buildScore().getScore()));
 
     return this;
   }
