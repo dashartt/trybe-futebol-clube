@@ -2,11 +2,10 @@
 
 ## Observações
 
-  Projeto desenvolvido ao cursar Desenvolvimento Web na [Trybe](https://www.betrybe.com/). <br>
+Projeto desenvolvido ao cursar Desenvolvimento Web na [Trybe](https://www.betrybe.com/). <br>
   
 Todo desenvolvimento realizado por mim se localiza na pasta app/backend/src. As outras partes desse projeto foram providas pela **Trybe**<br>
-_________________________________
-<br>
+
 
 ## Contexto
   ![Exemplo app front](assets/front-example.png)
@@ -19,7 +18,6 @@ _________________________________
   O back-end implementa regras de negócio para popular adequadamente a tabela disponível no front-end que será exibida para a pessoa usuária do sistema.
 <br>
 _________________________________
-<br>
 
 ## Técnologias e conhecimentos colado em prática
   - Docker;
@@ -32,7 +30,6 @@ _________________________________
   - Arquitetura MVC e API RESTful.
 
 _________________________________
-<br>
 
 ## Executando aplicação
   É necessário possuir o Git e Docker Compose ^v1.29 <br>
@@ -44,16 +41,12 @@ _________________________________
   ```
   O Frontend está disponível na url: http://localhost:3000/
 _________________________________
-<br>
 
 ## Executando os testes
   Para rodar testes de cobertura no Backend, estando na pasta app/backend/ execute o comando: 
   ```
   npm run test:coverage
   ```
-
-_________________________________
-<br>
 
 ## Endpoints do servidor no Backend
 <details>
@@ -180,8 +173,6 @@ _________________________________
 </details>
 <br>
 
-_________________________________
-<br>
 
 ## Navegando na aplicação
 
