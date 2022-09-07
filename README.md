@@ -1,17 +1,14 @@
 # Trybe Futebol Clube
 
-# !Observações!
+## Observações
 
   Projeto desenvolvido ao cursar Desenvolvimento Web na [Trybe](https://www.betrybe.com/). <br>
-  <br>
-  O objetivo desse projeto é praticar:<br>
-  - Integração do Backend com Fronten, sendo assim, o Frontend foi desenvolvido pela **Trybe**.<br>
-  - Utilizar Express e Sequelize com Trypescript, usando conceitos de OOP e construção de testes com Mocha Chai Sinnon.<br>  
   
 Todo desenvolvimento realizado por mim se localiza na pasta app/backend/src. As outras partes desse projeto foram providas pela **Trybe**<br>
-    
+_________________________________
+<br>
 
-# Contexto
+## Contexto
   ![Exemplo app front](assets/front-example.png)
   O `TFC` é um site informativo sobre partidas e classificações de futebol! ⚽️
 
@@ -20,19 +17,22 @@ Todo desenvolvimento realizado por mim se localiza na pasta app/backend/src. As 
   Para adicionar uma partida é necessário ter um _token_, portanto a pessoa deverá estar logada para fazer as alterações. 
 
   O back-end implementa regras de negócio para popular adequadamente a tabela disponível no front-end que será exibida para a pessoa usuária do sistema.
+<br>
+_________________________________
+<br>
 
 ## Técnologias e conhecimentos colado em prática
   - Docker;
   - TypeScript;
-  - Node
-  - Express;
-  - API RESTful;
-  - MySql;
-  - Sequelize;
-  - JTW (Json Web Token)
-  - Utilizar conceitos da Programação Orientada a Objetos;
-  - Conceitos de SOLID;
-  - Arquitetura MVC.
+  - Node e Express;  
+  - Mocha, Chai e Sinnon  
+  - Sequelize e MySql;
+  - Json Web Token;
+  - Utilizar conceitos da Programação Orientada a Objetos e Conceitos de SOLID;  
+  - Arquitetura MVC e API RESTful.
+
+_________________________________
+<br>
 
 ## Executando aplicação
   É necessário possuir o Git e Docker Compose ^v1.29 <br>
@@ -43,12 +43,17 @@ Todo desenvolvimento realizado por mim se localiza na pasta app/backend/src. As 
   npm install && npm run compose:up
   ```
   O Frontend está disponível na url: http://localhost:3000/
+_________________________________
+<br>
 
 ## Executando os testes
   Para rodar testes de cobertura no Backend, estando na pasta app/backend/ execute o comando: 
   ```
   npm run test:coverage
   ```
+
+_________________________________
+<br>
 
 ## Endpoints do servidor no Backend
 <details>
@@ -173,7 +178,10 @@ Todo desenvolvimento realizado por mim se localiza na pasta app/backend/src. As 
 
 -`Obs`: todas as informações do placar são fornecidas através de regras de negócio no backend, o frontend é respnsável apenas por reenderizar essas informações.
 </details>
+<br>
 
+_________________________________
+<br>
 
 ## Navegando na aplicação
 
@@ -205,12 +213,12 @@ OBS: não é possível editar partida que já foi finalizada.
 <details>
   <summary><strong> Classificação </strong></summary><br />
 No header, no canto superior direito clicando no botão 'Classificação'. <br>
-<br>
 Uma visão geral da situação de cada time. <br>
 <br>
 É possível filtrar por classificação dos times<br>
 - Times da casa<br>
 - Times de fora<br>
 - Geral, ambos times<br>
-
+<br>
+OBS: Os filtros do time de casa e time de fora ainda não foram implementados.
 </details>
