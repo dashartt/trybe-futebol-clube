@@ -201,7 +201,7 @@ password: secret_admin
 [Criar partida] <br>
 No canto superior direito tem a possibilidade de criar a partida. <br>
 <br>
-[Filtrar partidas]
+[Filtrar partidas]<br>
 No canto superior esquerdo tem a filtragem das partidas por 'Finalizadas' ou 'Em andamento'. <br>
 <br>
 [Editar partida]<br>
